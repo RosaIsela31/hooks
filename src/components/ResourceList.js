@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
-const ResourceList = ({ resource }) => {
+// input resource va a recibir post or todos
+const useResources = (resource) => {
 
   const [ resources, setResources ] = useState([])
 
@@ -14,6 +15,15 @@ const ResourceList = ({ resource }) => {
       })(resource)
   }, [resource]);
 
+  return resources
+}
+
+//-------------------------------
+
+const ResourceList = ({ resource }) => {
+  const resources = useResources(resource)
+
+  
     return(
       <ul>
         {resources.map(record => <li key={record.id}>{record.title}</li>)}
